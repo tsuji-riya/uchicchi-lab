@@ -4,6 +4,11 @@ on:
     branches:
       - "**"
 
+env:
+  TF_VAR_cloudflare_api_token: ${{ secrets.TF_VAR_cloudflare_api_token }}
+  TF_VAR_kubernetes_client_certificate: ${{ secrets.TF_VAR_kubernetes_client_certificate }}
+  TF_VAR_kubernetes_client_key: ${{ secrets.TF_VAR_kubernetes_client_key }}
+  TF_VAR_kubernetes_cluster_ca_certificate: ${{ secrets.TF_VAR_kubernetes_cluster_ca_certificate }}
 jobs:
   check:
     runs-on: ubuntu-latest
