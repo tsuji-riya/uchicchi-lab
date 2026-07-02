@@ -1,0 +1,52 @@
+name: push.yml
+on:
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Terraform init
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Check .tf files format
+        run: terraform fmt -check -recursive
+        working-directory: ./terraform
+
+      - name: Check .tf files for errors
+        run: terraform validate
+        working-directory: ./terraform
+
+  plan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Terraform init
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Manage tfstate with MongoDB
+        uses: tsuji-riya/tfstate-loves-mongo@v1.2.3
+        with:
+          mongo-uri: ${{ secrets.MONGO_URI }}
+          database: tfstate
+          collection: ouchicchi
+          destination: ./terraform/terraform.tfstate
+
+      - name: Terraform plan
+        run: terraform plan
+        working-directory: ./terraform
