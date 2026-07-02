@@ -1,7 +1,7 @@
 resource "cloudflare_zero_trust_access_policy" "k3s_api" {
   account_id = local.cloudflare_account_id
-  name = "k3s-api"
-  decision = "non_identity"
+  name       = "k3s-api"
+  decision   = "non_identity"
   include = [
     {
       service_token = {
