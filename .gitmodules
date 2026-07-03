@@ -1,3 +1,6 @@
 [submodule "submodules/cockroachdb-helm-charts"]
 	path = submodules/cockroachdb-helm-charts
 	url = https://github.com/cockroachdb/helm-charts
+[submodule "submodules/argo-cd"]
+	path = submodules/argo-cd
+	url = https://github.com/argoproj/argo-cd
