@@ -9,3 +9,9 @@ resource "kubernetes_namespace_v1" "cockroachdb" {
     name = "cockroachdb"
   }
 }
+
+resource "kubernetes_namespace_v1" "headlamp" {
+  metadata {
+    name = "headlamp"
+  }
+}
