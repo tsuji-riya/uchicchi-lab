@@ -10,3 +10,16 @@ resource "cloudflare_zero_trust_access_policy" "k3s_api" {
     }
   ]
 }
+
+resource "cloudflare_zero_trust_access_policy" "k3s_headlamp" {
+  account_id = local.cloudflare_account_id
+  name       = "k3s-headlamp"
+  decision   = "allow"
+  include = [
+    {
+      email = {
+        email = "tsuji.riya@gmail.com"
+      }
+    }
+  ]
+}
